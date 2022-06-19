@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+var subjectObject = {
+  "A": {
+    "A1": ["Sub_A1", "Sub_A2"],
+    "A2": ["Sub_A3", "Sub_A4"],
+    "A3": ["Sub_A5", "Sub_A6"]    
+  },
+  "B": {
+    "B1": ["Sub_B1", "Sub_B2"],
+    "B2": ["Sub_B3", "Sub_B4"],
+    "B3": ["Sub_B5", "Sub_B6"] 
+  }
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  var topicSel = document.getElementById("topic");
+  var chapterSel = document.getElementById("chapter");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+     chapterSel.length = 1;
+     topicSel.length = 1;
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+  topicSel.onchange = function() {
+    chapterSel.length = 1;
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+
+function getOption() {
+		selectElement = document.querySelector('#subject');
+        selectElement1 = document.querySelector('#topic');
+        selectElement2 = document.querySelector('#chapter');
+		output = selectElement.value +","+ selectElement1.value+ "," +selectElement2.value;
+		document.querySelector('.output').textContent = output;
+	}
+
+
+</script>
+
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        width: 100px;
+        height: 70px;
+        }
+    .Grp{
+        text-align: center;
+    }
+    .Grp1{
+        text-align: center;
+    }
+    .out{
+        width: 100;
+        height: 75px;
+        border: 1px solid black;
+    }
+
+</style>
+
+</head>   
+<body>
+
+<header>
+    <img src="https://www.cognitoforms.com/file/RYobZ_w5eVm_aRV2cuPylZS3j8iZQwosX-RShctvxPwv0lDZdlKL1e_MrumOfG0l" alt="Caspian"  class="center">
+    <h1 style="background-color: grey; text-align: center;">UI Assignment</h1>
+</header>
+<div class="Grp">
+    Group A: 
+    &emsp;&emsp;&emsp;&emsp;&emsp;
+    Group B: 
+    <br>
+    <select name="subject" id="subject">
+        <option value="" selected="selected">Select subject</option>
+      </select>
+      &ensp;
+    <select name="topic" id="topic">
+        <option value="" selected="selected">Please select subject first</option>
+      </select>
+</div> 
+  <br><br>
+<div class="Grp1">
+    Group C <br><br><select name="chapter" id="chapter" multiple>
+        <option value="" selected="selected">Please select topic first</option>
+      </select>
+</div>
+  <br><br>
+<button onclick="getOption()"> Check option </button>
+
+<p> Output:
+    <div class="out">
+        <span class="output"></span>
+    </div>
+</p>
+
+</body>
+</html>
